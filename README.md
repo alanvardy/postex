@@ -13,27 +13,27 @@ Most of this work is not my own, all credit to Dashbit and José Valim.
 
 Assuming that you `use Postex` in a module named `Blog`, your API is:
 
-###  `Blog.list_posts/0`
+####  `Blog.list_posts/0`
 
 Lists all the posts
 
-### `Blog.posts_tagged_with/1`
+#### `Blog.posts_tagged_with/1`
 
 Pass it a single tag and it will return a list of the posts with that tag
 
-### `Blog.get_post/1`
+#### `Blog.get_post/1`
 
 Get a post by id (slug), returns `nil` if not found,
 
-### `Blog.fetch_post/1`
+#### `Blog.fetch_post/1`
 
 Get a post by id (slug), returns `{:ok, post}` or `{:error, :not_found}`
   
-### `Blog.list_tags/0`
+#### `Blog.list_tags/0`
 
 Lists all the tags
 
-### `Blog.tags_with_count/0`
+#### `Blog.tags_with_count/0`
 
 Returns a map where the string keys are the tags, and values are integers representing the frequency of their appearance.
 
