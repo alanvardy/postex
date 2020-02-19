@@ -1,13 +1,24 @@
 # Postex
 
-**TODO: Add description**
+Postex is a simple static blog generator using markdown files that is inspired/copied from
+[Dashbit's blog post](https://dashbit.co/blog/welcome-to-our-blog-how-it-was-made).
+
+The posts are generated at compile time, and syntax highlighting works well. Earmark is used 
+for markdown parsing and makeup_elixir / stolen ex_doc code for syntax highlighting. Phoenix_html is pulled in for a single protocol implementation.
+
+This library just provides the context, the routes, views, controllers and templates are still in your hands.
+
+Most of this work is not my own, all credit to Dashbit and Jose Valim.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `postex` to your list of dependencies in `mix.exs`:
+This library requires `Elixir >= 1.10`
+
+Add `postex` to your list of dependencies in `mix.exs`:
 
 ```elixir
+# mix.exs
+
 def deps do
   [
     {:postex, "~> 0.1.0"}
@@ -15,7 +26,89 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/postex](https://hexdocs.pm/postex).
+Create a module and `use Postex` within it
 
+```elixir
+defmodule YourApp.Blog do
+  @moduledoc "The blog context"
+  use Postex
+end
+```
+
+This will give you access to:
+
+`Blog.list_posts/0`
+`Blog.posts_tagged_with/1`
+`Blog.get_post!/1`
+`Blog.list_tags/0`
+`Blog.tags_with_count/0`
+
+Add markdown file patterns to your Endpoint config in `config/dev.exs` for live reloading.
+
+```elixir
+# dev.exs
+
+config :your_app, YourAppWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ... the other patterns ...
+      ~r"posts/*/.*(md)$"
+    ]
+  ]
+```
+
+And add some routes
+
+```elixir
+# router.ex
+
+get "/blog", YourAppWeb.PostController, :index
+resources "/post", YourAppWeb.PostController, only: [:show]
+resources "/tag", YourAppWeb.TagController, only: [:index, :show]
+```
+
+And build out your controllers, views, and templates.
+
+Check `CSS.md` for an example on styling the HTML output.
+
+
+## Usage
+
+Store markdown files with the path `/blog/{year}/{month}-{day}-{slug}.md` 
+
+For example `/blog/2020/03-17-this-is-a-blog-slug.md`
+
+
+Format your markdown file like so
+
+```markdown
+  ==title==
+  Your Title Goes Here
+
+  ==author==
+  Your name probably
+
+  ==footer==
+  _a_cool_place_for_a_partial.html
+
+  ==description==
+  More text and stuff
+
+  ==tags==
+  separate,your tags, with, commas
+
+  ==body==
+
+  # This is a title
+
+  ![alt text](picture.jpg "Awesome picture")
+
+  This is a paragraph
+
+```
+
+Store your images in the path `/assets/static/images/blog/{year}/{picture.jpg}` and reference them by the filename only (as seen in the example above).
+
+## Contributing
+
+I welcome contributions, but please check with me before starting on a pull request - I would hate to have your efforts be in vain.
