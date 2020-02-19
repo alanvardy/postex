@@ -7,7 +7,7 @@ Postex is a simple static blog generator using markdown files that is inspired/s
 The posts are generated at compile time, and syntax highlighting works well. Earmark is used 
 for markdown parsing and makeup_elixir / stolen ex_doc code for syntax highlighting. Phoenix_html is pulled in for a single protocol implementation.
 
-This library just provides the context, the routes, views, controllers and templates are still in your hands.
+This library just provides the context. The routes, views, controllers and templates are still in your hands.
 
 Most of this work is not my own, all credit to Dashbit and José Valim.
 
