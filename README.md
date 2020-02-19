@@ -1,6 +1,6 @@
 # Postex
 
-[![Build Status](https://github.com/alanvardy/postex/workflows/Unit%20Tests/badge.svg)](https://github.com/alanvardy/postex)[![Build Status](https://github.com/alanvardy/postex/workflows/Dialyzer/badge.svg)](https://github.com/alanvardy/postex) [![hex.pm](http://img.shields.io/hexpm/v/postex.svg?style=flat)](https://hex.pm/packages/postex)
+[![Build Status](https://github.com/alanvardy/postex/workflows/Unit%20Tests/badge.svg)](https://github.com/alanvardy/postex) [![Build Status](https://github.com/alanvardy/postex/workflows/Dialyzer/badge.svg)](https://github.com/alanvardy/postex) [![hex.pm](http://img.shields.io/hexpm/v/postex.svg?style=flat)](https://hex.pm/packages/postex)
 
 Postex is a simple static blog generator using markdown files that is inspired/shamelessly copied from [Dashbit's blog post](https://dashbit.co/blog/welcome-to-our-blog-how-it-was-made).
 
