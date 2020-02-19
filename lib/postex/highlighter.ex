@@ -1,24 +1,10 @@
 defmodule Postex.Highlighter do
   @moduledoc """
-  Performs code highlighting.
+  Performs code highlighting. Stolen shamelessly from ex_doc
   """
-
-  @doc """
-  Highlighter specific assets.
-  """
-  def assets(_), do: []
-
-  @doc """
-  Highlighter specific annotations.
-  """
-  def before_closing_head_tag(_), do: ""
-
-  @doc """
-  Highlighter specific annotations.
-  """
-  def before_closing_body_tag(_), do: ""
 
   # If new lexers are available, add them here:
+  @spec pick_language_and_lexer(binary) :: {binary, atom | nil, keyword}
   defp pick_language_and_lexer(""), do: {"elixir", Makeup.Lexers.ElixirLexer, []}
 
   defp pick_language_and_lexer(lang) do
@@ -34,6 +20,7 @@ defmodule Postex.Highlighter do
   @doc """
   Highlights all code block in an already generated HTML document.
   """
+  @spec highlight_code_blocks(binary, keyword) :: binary
   def highlight_code_blocks(html, opts \\ []) do
     Regex.replace(
       ~r/<pre><code(?:\s+class="(\w*)")?>([^<]*)<\/code><\/pre>/,
@@ -42,6 +29,7 @@ defmodule Postex.Highlighter do
     )
   end
 
+  @spec highlight_code_block(binary, binary, binary, keyword) :: binary
   defp highlight_code_block(full_block, lang, code, outer_opts) do
     case pick_language_and_lexer(lang) do
       {_language, nil, _opts} -> full_block
