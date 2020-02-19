@@ -14,7 +14,11 @@ defmodule PostexTest do
   }
 
   test "Can get post" do
-    assert Blog.get_post!("test-one") == @post
+    assert Blog.get_post("test-one") == @post
+  end
+
+  test "Can fetch post" do
+    assert Blog.fetch_post("test-one") == {:ok, @post}
   end
 
   test "Can list posts" do

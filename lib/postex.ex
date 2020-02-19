@@ -47,7 +47,7 @@ defmodule Postex do
         Enum.find(@posts, fn post -> post.id == id end)
       end
 
-      @spec fetch_post(binary) :: {:ok, Post.t} | {:error, :not_found}
+      @spec fetch_post(binary) :: {:ok, Post.t()} | {:error, :not_found}
       def fetch_post(id) do
         case get_post(id) do
           nil -> {:error, :not_found}
