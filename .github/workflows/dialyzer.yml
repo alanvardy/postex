@@ -33,6 +33,6 @@ jobs:
       - uses: actions/setup-elixir@v1.0.0
         with:
           otp-version: 22.1.8
-          elixir-version: 1.9.4
+          elixir-version: 1.10.1
       - run: mix deps.get
       - run: MIX_ENV=dev mix check --only dialyzer
