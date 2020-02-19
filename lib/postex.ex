@@ -42,9 +42,17 @@ defmodule Postex do
       end
 
       @doc "Gets a specific post by the id (slug)"
-      @spec get_post!(binary) :: Post.t()
-      def get_post!(id) do
+      @spec get_post(binary) :: Post.t() | nil
+      def get_post(id) do
         Enum.find(@posts, fn post -> post.id == id end)
+      end
+
+      @spec fetch_post(id) :: {:ok, Post.t} | {:error, :not_found}
+      def fetch_post(id) do
+        case get_post(id) do
+          nil -> {:error, :not_found}
+          post -> {:ok, post}
+        end
       end
 
       # TAGS
