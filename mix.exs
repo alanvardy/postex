@@ -7,18 +7,18 @@ defmodule Postex.MixProject do
     [
       app: :postex,
       version: @version,
-      elixir: "~> 1.9",
+      elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       build_embedded: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
 
       # Hex
-      description: "Dynamically updating, searchable, sortable datatables with Phoenix LiveView",
+      description: "a simple static blog generator using markdown files",
       package: package(),
 
       # Docs
-      name: "Exzeitable",
+      name: "Postex",
       docs: docs()
     ]
   end
@@ -62,8 +62,16 @@ defmodule Postex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:phoenix_html, "~> 2.11"},
       {:earmark, "~> 1.3"},
-      {:makeup_elixir, "~> 0.14"}
+      {:makeup_elixir, "~> 0.14"},
+      # Tooling
+      {:ex_check, ">= 0.0.0", only: :dev, runtime: false},
+      {:credo, "~> 1.2.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.6", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.10", only: :test, runtime: false},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]}
     ]
   end
 end
