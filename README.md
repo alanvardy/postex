@@ -1,14 +1,42 @@
 # Postex
 
-Postex is a simple static blog generator using markdown files that is inspired/copied from
-[Dashbit's blog post](https://dashbit.co/blog/welcome-to-our-blog-how-it-was-made).
+Postex is a simple static blog generator using markdown files that is inspired/shamelessly copied from [Dashbit's blog post](https://dashbit.co/blog/welcome-to-our-blog-how-it-was-made).
 
 The posts are generated at compile time, and syntax highlighting works well. Earmark is used 
 for markdown parsing and makeup_elixir / stolen ex_doc code for syntax highlighting. Phoenix_html is pulled in for a single protocol implementation.
 
 This library just provides the context, the routes, views, controllers and templates are still in your hands.
 
-Most of this work is not my own, all credit to Dashbit and Jose Valim.
+Most of this work is not my own, all credit to Dashbit and José Valim.
+
+## Usage
+
+Assuming that you `use Postex` in a module named `Blog`, your API is:
+
+###  `Blog.list_posts/0`
+
+Lists all the posts
+
+### `Blog.posts_tagged_with/1`
+
+Pass it a single tag and it will return a list of the posts with that tag
+
+### `Blog.get_post/1`
+
+Get a post by id (slug), returns `nil` if not found,
+
+### `Blog.fetch_post/1`
+
+Get a post by id (slug), returns `{:ok, post}` or `{:error, :not_found}`
+  
+### `Blog.list_tags/0`
+
+Lists all the tags
+
+### `Blog.tags_with_count/0`
+
+Returns a map where the string keys are the tags, and values are integers representing the frequency of their appearance.
+
 
 ## Installation
 
@@ -34,14 +62,6 @@ defmodule YourApp.Blog do
   use Postex
 end
 ```
-
-This will give you access to:
-
-`Blog.list_posts/0`
-`Blog.posts_tagged_with/1`
-`Blog.get_post!/1`
-`Blog.list_tags/0`
-`Blog.tags_with_count/0`
 
 Add markdown file patterns to your Endpoint config in `config/dev.exs` for live reloading.
 
@@ -72,7 +92,7 @@ And build out your controllers, views, and templates.
 Check `CSS.md` for an example on styling the HTML output.
 
 
-## Usage
+## Adding Templates and Pictures
 
 Store markdown files with the path `/blog/{year}/{month}-{day}-{slug}.md` 
 
@@ -89,7 +109,7 @@ Format your markdown file like so
   Your name probably
 
   ==footer==
-  _a_cool_place_for_a_partial.html
+  sometemplatepartial.html
 
   ==description==
   More text and stuff
