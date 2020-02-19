@@ -1,5 +1,7 @@
 # Postex
 
+[![Build Status](https://github.com/alanvardy/postex/workflows/Elixir%20ex_check/badge.svg)](https://github.com/alanvardy/postex) [![hex.pm](http://img.shields.io/hexpm/v/postex.svg?style=flat)](https://hex.pm/packages/postex)
+
 Postex is a simple static blog generator using markdown files that is inspired/shamelessly copied from [Dashbit's blog post](https://dashbit.co/blog/welcome-to-our-blog-how-it-was-made).
 
 The posts are generated at compile time, and syntax highlighting works well. Earmark is used 
@@ -8,6 +10,8 @@ for markdown parsing and makeup_elixir / stolen ex_doc code for syntax highlight
 This library just provides the context, the routes, views, controllers and templates are still in your hands.
 
 Most of this work is not my own, all credit to Dashbit and José Valim.
+
+Documentation can be found at [https://hexdocs.pm/postex](https://hexdocs.pm/postex).
 
 ## Usage
 
