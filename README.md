@@ -53,7 +53,7 @@ Add `postex` to your list of dependencies in `mix.exs`:
 
 def deps do
   [
-    {:postex, "~> 0.1.0"}
+    {:postex, "~> 0.1.1"}
   ]
 end
 ```
@@ -132,6 +132,10 @@ Format your markdown file like so
 ```
 
 Store your images in the path `/assets/static/images/blog/{year}/{picture.jpg}` and reference them by the filename only (as seen in the example above).
+
+## Recompiling
+
+You may have occasional issues getting a markdown file recognized after being added or renamed, in this case run `mix recompile --force`.
 
 ## Contributing
 

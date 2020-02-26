@@ -5,15 +5,22 @@ defmodule Postex do
 
   See the README for more details!
   """
-  defmacro __using__(_opts) do
+  defmacro __using__(opts) do
+    prefix = Keyword.get(opts, :prefix)
+
     quote do
       alias Postex.Post
+      alias Postex.Validate
 
       for app <- [:earmark, :makeup_elixir] do
         Application.ensure_all_started(app)
       end
 
-      # POSTS
+      prefix =
+        unquote(prefix)
+        |> Validate.prefix_defined()
+
+      # Generating posts
 
       posts_paths =
         "posts/**/*.md"
@@ -26,8 +33,12 @@ defmodule Postex do
           @external_resource Path.relative_to_cwd(post_path)
           Post.parse!(post_path)
         end
+        |> Validate.no_duplicate_slugs()
+        |> Validate.url_length(prefix)
 
       @posts Enum.sort_by(posts, & &1.date, {:desc, Date})
+
+      # Posts API
 
       @doc "Returns a list of all the posts"
       @spec list_posts :: [Post.t()]
@@ -55,12 +66,14 @@ defmodule Postex do
         end
       end
 
-      # TAGS
+      # Generating Tags
 
       @tags_with_count posts
                        |> Enum.map(fn post -> post.tags end)
                        |> List.flatten()
                        |> Enum.frequencies()
+
+      # Tags API
 
       @doc "Gets a list of all the tags"
       @spec list_tags :: [binary]
