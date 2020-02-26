@@ -1,5 +1,6 @@
 defmodule PostexTest do
   use ExUnit.Case
+  alias Postex.Post
 
   @post %Postex.Post{
     author: "Alan Vardy",
@@ -10,7 +11,8 @@ defmodule PostexTest do
     footer: "_some_footer",
     id: "test-one",
     tags: ["tag one", "three", "two"],
-    title: "Test of the testiest variety"
+    title: "Test of the testiest variety",
+    filename: "posts/2020/03-17-test-one.md"
   }
 
   test "Can get post" do
