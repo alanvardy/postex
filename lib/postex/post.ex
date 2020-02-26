@@ -2,8 +2,8 @@ defmodule Postex.Post do
   @moduledoc "An individual blog post"
 
   alias Postex.Highlighter
-  @enforce_keys [:id, :author, :title, :body, :description, :tags, :date, :footer]
-  defstruct [:id, :author, :title, :body, :description, :tags, :date, :footer]
+  @enforce_keys [:id, :filename, :author, :title, :body, :description, :tags, :date, :footer]
+  defstruct [:id, :filename, :author, :title, :body, :description, :tags, :date, :footer]
 
   @type t :: %__MODULE__{
           id: binary,
@@ -42,7 +42,7 @@ defmodule Postex.Post do
     # Get all attributes from the contents
     contents = filename |> File.read!() |> parse_contents(year)
     # And finally build the post struct
-    struct!(__MODULE__, [id: id, date: date] ++ contents)
+    struct!(__MODULE__, [id: id, date: date, filename: filename] ++ contents)
   end
 
   defp parse_contents(contents, year) do

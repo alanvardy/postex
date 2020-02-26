@@ -53,7 +53,7 @@ Add `postex` to your list of dependencies in `mix.exs`:
 
 def deps do
   [
-    {:postex, "~> 0.1.0"}
+    {:postex, "~> 0.1.1"}
   ]
 end
 ```

@@ -8,6 +8,7 @@ defmodule Postex do
   defmacro __using__(_opts) do
     quote do
       alias Postex.Post
+      alias Postex.Validate
 
       for app <- [:earmark, :makeup_elixir] do
         Application.ensure_all_started(app)
@@ -26,6 +27,7 @@ defmodule Postex do
           @external_resource Path.relative_to_cwd(post_path)
           Post.parse!(post_path)
         end
+        |> Validate.no_duplicate_slugs()
 
       @posts Enum.sort_by(posts, & &1.date, {:desc, Date})
 
