@@ -90,6 +90,7 @@ defmodule Postex.Validate do
 
         raise """
         The following posts have addresses that are greater than 60 characters, which negatively impacts SEO.
+        Reference: https://neilpatel.com/blog/seo-urls/
 
         #{posts_message}
         """
