@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.1.1 (2019-2-25)
+## v0.1.1 (2019-2-26)
 
 * Breaking change: Need to define prefix in use statement, or explicitly set to false
 * Verify url with slug does not exceed 60 characters
