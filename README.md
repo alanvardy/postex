@@ -133,6 +133,10 @@ Format your markdown file like so
 
 Store your images in the path `/assets/static/images/blog/{year}/{picture.jpg}` and reference them by the filename only (as seen in the example above).
 
+## Recompiling
+
+You may have occasional issues getting a markdown file recognized after being added or renamed, in this case run `mix recompile --force`.
+
 ## Contributing
 
 I welcome contributions, but please check with me before starting on a pull request - I would hate to have your efforts be in vain.
