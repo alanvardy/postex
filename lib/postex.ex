@@ -9,8 +9,7 @@ defmodule Postex do
     prefix = Keyword.get(opts, :prefix)
 
     quote do
-      alias Postex.Post
-      alias Postex.Validate
+      alias Postex.{MetaData, Post, Validate}
 
       for app <- [:earmark, :makeup_elixir] do
         Application.ensure_all_started(app)
@@ -28,13 +27,17 @@ defmodule Postex do
         |> Enum.reject(fn post -> String.contains?(post, "draft") end)
         |> Enum.sort()
 
+      for post_path <- posts_paths do
+        @external_resource Path.relative_to_cwd(post_path)
+      end
+
       posts =
-        for post_path <- posts_paths do
-          @external_resource Path.relative_to_cwd(post_path)
-          Post.parse!(post_path)
-        end
+        posts_paths
+        |> Enum.map(&Post.parse!/1)
         |> Validate.no_duplicate_slugs()
         |> Validate.url_length(prefix)
+        |> Validate.same_data_fields()
+        |> MetaData.add_related_posts()
 
       @posts Enum.sort_by(posts, & &1.date, {:desc, Date})
 
