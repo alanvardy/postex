@@ -97,6 +97,29 @@ defmodule Postex.Validate do
     end
   end
 
+  @spec same_data_fields([Post.t()]) :: [Post.t()]
+  def same_data_fields(posts) do
+    sorted_posts =
+      Enum.sort(posts, fn one, two -> Enum.count(one.data) >= Enum.count(two.data) end)
+
+    first = List.first(sorted_posts)
+    last = List.last(sorted_posts)
+
+    if Enum.count(first.data) == Enum.count(last.data) do
+      posts
+    else
+      first_keys = first |> Map.get(:data) |> Map.keys()
+      last_keys = last |> Map.get(:data) |> Map.keys()
+
+      raise """
+        Your data fields are inconsistent across posts
+
+        #{first.filename} has the following keys under data: #{inspect(first_keys)}
+        #{last.filename} has the following keys under data: #{inspect(last_keys)}
+      """
+    end
+  end
+
   defp to_slugs(posts), do: Enum.map(posts, fn post -> post.id end)
 
   defp url_error_message(post, prefix) do

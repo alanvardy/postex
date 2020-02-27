@@ -1,8 +1,10 @@
 # Postex
 
-[![Build Status](https://github.com/alanvardy/postex/workflows/Unit%20Tests/badge.svg)](https://github.com/alanvardy/postex) [![Build Status](https://github.com/alanvardy/postex/workflows/Dialyzer/badge.svg)](https://github.com/alanvardy/postex) [![hex.pm](http://img.shields.io/hexpm/v/postex.svg?style=flat)](https://hex.pm/packages/postex)
+[![Build Status](https://github.com/alanvardy/postex/workflows/Unit%20Tests/badge.svg)](https://github.com/alanvardy/postex) 
+[![Build Status](https://github.com/alanvardy/postex/workflows/Dialyzer/badge.svg)](https://github.com/alanvardy/postex) 
+[![hex.pm](http://img.shields.io/hexpm/v/postex.svg?style=flat)](https://hex.pm/packages/postex)
 
-Postex is a simple static blog generator using markdown files that is inspired/shamelessly copied from [Dashbit's blog post](https://dashbit.co/blog/welcome-to-our-blog-how-it-was-made).
+Postex is a simple static blog generator using markdown files that was inspired/shamelessly copied from [Dashbit's blog post](https://dashbit.co/blog/welcome-to-our-blog-how-it-was-made).
 
 The posts are generated at compile time, and syntax highlighting works well. Earmark is used 
 for markdown parsing and makeup_elixir / stolen ex_doc code for syntax highlighting. Phoenix_html is pulled in for a single protocol implementation.
@@ -12,6 +14,22 @@ This library just provides the context. The routes, views, controllers and templ
 Most of this work is not my own, all credit to Dashbit and José Valim.
 
 Documentation can be found at [https://hexdocs.pm/postex](https://hexdocs.pm/postex).
+
+## Features
+
+* Posts are generated at compile time (fast access, no database required)
+* Posts live update as you edit them.
+* Posts have tags
+* Elixir syntax highlighting
+* You can add as many additional fields as you want, they can be found under `:data` and are represented as a map.
+* Includes 5 related posts (determined based on how many tags they share) as an association for each post
+* Easy image handling (see below)
+
+## Compile Time Checks
+
+* Post url does not exceed 60 characters (for SEO - can be disabled)
+* No duplicate slugs (post ids)
+* All field keys are consistent across all posts (including within the data field)
 
 ## Usage
 
@@ -53,7 +71,7 @@ Add `postex` to your list of dependencies in `mix.exs`:
 
 def deps do
   [
-    {:postex, "~> 0.1.1"}
+    {:postex, "~> 0.1.2"}
   ]
 end
 ```
@@ -112,9 +130,6 @@ Format your markdown file like so
   ==author==
   Your name probably
 
-  ==footer==
-  sometemplatepartial.html
-
   ==description==
   More text and stuff
 
@@ -130,6 +145,8 @@ Format your markdown file like so
   This is a paragraph
 
 ```
+
+## Storing images
 
 Store your images in the path `/assets/static/images/blog/{year}/{picture.jpg}` and reference them by the filename only (as seen in the example above).
 

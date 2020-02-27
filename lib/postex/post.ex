@@ -2,8 +2,29 @@ defmodule Postex.Post do
   @moduledoc "An individual blog post"
 
   alias Postex.Highlighter
-  @enforce_keys [:id, :filename, :author, :title, :body, :description, :tags, :date, :footer]
-  defstruct [:id, :filename, :author, :title, :body, :description, :tags, :date, :footer]
+
+  @enforce_keys [
+    :id,
+    :filename,
+    :author,
+    :title,
+    :body,
+    :description,
+    :tags,
+    :data
+  ]
+  defstruct [
+    :id,
+    :filename,
+    :author,
+    :title,
+    :body,
+    :description,
+    :tags,
+    :date,
+    :data,
+    :related_posts
+  ]
 
   @type t :: %__MODULE__{
           id: binary,
@@ -12,7 +33,9 @@ defmodule Postex.Post do
           body: binary,
           description: binary,
           tags: [binary],
-          date: Date.t()
+          related_posts: [t()],
+          date: Date.t(),
+          data: map
         }
 
   defimpl String.Chars, for: __MODULE__ do
@@ -42,19 +65,28 @@ defmodule Postex.Post do
     # Get all attributes from the contents
     contents = filename |> File.read!() |> parse_contents(year)
     # And finally build the post struct
-    struct!(__MODULE__, [id: id, date: date, filename: filename] ++ contents)
+    struct!(__MODULE__, [id: id, date: date, filename: filename, related_posts: []] ++ contents)
   end
 
   defp parse_contents(contents, year) do
+    excluded_fields = [:author, :title, :body, :description, :tags]
     # Split contents into  ["==title==\n", "this title", "==tags==\n", "this, tags", ...]
     parts = Regex.split(~r/^==(\w+)==\n/m, contents, include_captures: true, trim: true)
 
     # Now chunk each attr and value into pairs and parse them
-    for [attr_with_equals, value] <- Enum.chunk_every(parts, 2) do
-      [_, attr, _] = String.split(attr_with_equals, "==")
-      attr = String.to_atom(attr)
-      {attr, parse_attr(attr, value, year)}
-    end
+    fields =
+      for [attr_with_equals, value] <- Enum.chunk_every(parts, 2) do
+        [_, attr, _] = String.split(attr_with_equals, "==")
+        attr = String.to_atom(attr)
+        {attr, parse_attr(attr, value, year)}
+      end
+
+    # Put extra fields under "data"
+    data_fields =
+      Enum.reject(fields, fn {field, _value} -> field in excluded_fields end) |> Enum.into(%{})
+
+    core_fields = Enum.filter(fields, fn {field, _value} -> field in excluded_fields end)
+    [{:data, data_fields} | core_fields]
   end
 
   @attributes [:title, :description, :author, :footer]
