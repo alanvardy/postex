@@ -45,6 +45,22 @@ defmodule PostexTest do
     assert Blog.list_posts() === [@post_one, @post_two]
   end
 
+  test "Can get first page" do
+    assert Blog.list_posts(1) === [@post_one]
+  end
+
+  test "Can get second page" do
+    assert Blog.list_posts(2) === [@post_two]
+  end
+
+  test "Doesn't blow up when asked for non-existent page" do
+    assert Blog.list_posts(3) === []
+  end
+
+  test "Can get number of pages" do
+    assert Blog.pages() === 2
+  end
+
   test "Can get tags" do
     assert Blog.list_tags() == @post_two.tags
   end

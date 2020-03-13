@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.3 (2019-3-12)
+
+* All external links (identified by beginning with `http`) open in a new tab
+* Added `:external_links_new_tab` option when using postex, defaults to `true`
+* Added `list_posts/1` and `pages/0` for paginating posts
+* Added `:per_pages` option when using postex, defaults to `10`
+
 ## v0.1.2 (2019-2-26)
 
 * Added `:related_posts` association to posts, listing the top 5 related posts based on tags.

@@ -39,6 +39,10 @@ Assuming that you `use Postex` in a module named `Blog`, your API is:
 
 Lists all the posts
 
+####  `Blog.list_posts/1`
+
+With a given page, lists the posts for that page (default posts per page is 10)
+
 #### `Blog.posts_tagged_with/1`
 
 Pass it a single tag and it will return a list of the posts with that tag
@@ -76,12 +80,15 @@ def deps do
 end
 ```
 
-Create a module and `use Postex` within it
+Create a module and `use Postex` within it.
 
 ```elixir
 defmodule YourApp.Blog do
   @moduledoc "The blog context"
-  use Postex
+  use Postex, 
+    prefix: "https://exampleblog.com/posts/" # required
+    external_links_new_tab: true # default
+    per_page: 10 # default
 end
 ```
 
@@ -146,9 +153,28 @@ Format your markdown file like so
 
 ```
 
+## External links
+
+External links (identified by beginning with `http`) are automatically appended with `target: "_blank"` to make the link open in a new tab.
+
+You can disable this functionality with
+
+```elixir
+defmodule YourApp.Blog do
+  @moduledoc "The blog context"
+  use Postex, 
+    prefix: "https://exampleblog.com/posts/",
+    external_links_new_tab: false
+end
+```
+
 ## Storing images
 
 Store your images in the path `/assets/static/images/blog/{year}/{picture.jpg}` and reference them by the filename only (as seen in the example above).
+
+## Pagination
+
+If you wish to implement pagination, check out the [GitHub repository for alanvardy.com](https://github.com/alanvardy/alan_vardy) for examples of how I put it together.
 
 ## Recompiling
 

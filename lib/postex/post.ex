@@ -48,8 +48,8 @@ defmodule Postex.Post do
     def to_iodata(%{title: title}), do: to_string(title)
   end
 
-  @spec parse!(binary) :: t()
-  def parse!(filename) do
+  @spec parse!(binary, keyword) :: t()
+  def parse!(filename, opts) do
     # Get the last two path segments from the filename
     [year, month_day_id] = filename |> Path.split() |> Enum.take(-2)
 
@@ -63,12 +63,12 @@ defmodule Postex.Post do
     date = Date.from_iso8601!("#{year}-#{month}-#{day}")
 
     # Get all attributes from the contents
-    contents = filename |> File.read!() |> parse_contents(year)
+    contents = filename |> File.read!() |> parse_contents(year, opts)
     # And finally build the post struct
     struct!(__MODULE__, [id: id, date: date, filename: filename, related_posts: []] ++ contents)
   end
 
-  defp parse_contents(contents, year) do
+  defp parse_contents(contents, year, opts) do
     excluded_fields = [:author, :title, :body, :description, :tags]
     # Split contents into  ["==title==\n", "this title", "==tags==\n", "this, tags", ...]
     parts = Regex.split(~r/^==(\w+)==\n/m, contents, include_captures: true, trim: true)
@@ -78,7 +78,7 @@ defmodule Postex.Post do
       for [attr_with_equals, value] <- Enum.chunk_every(parts, 2) do
         [_, attr, _] = String.split(attr_with_equals, "==")
         attr = String.to_atom(attr)
-        {attr, parse_attr(attr, value, year)}
+        {attr, parse_attr(attr, value, year, opts)}
       end
 
     # Put extra fields under "data"
@@ -90,26 +90,37 @@ defmodule Postex.Post do
   end
 
   @attributes [:title, :description, :author, :footer]
-  defp parse_attr(attribute, value, _year) when attribute in @attributes do
+  defp parse_attr(attribute, value, _year, _opts) when attribute in @attributes do
     String.trim(value)
   end
 
-  defp parse_attr(:body, value, year) do
+  defp parse_attr(:body, value, year, opts) do
+    external_links_new_tab = Keyword.get(opts, :external_links_new_tab, true)
+
     value
     |> Earmark.as_html!()
     |> prepend_images(year)
+    |> external_links(external_links_new_tab)
     |> Highlighter.highlight_code_blocks()
   end
 
-  defp parse_attr(:tags, value, _year) do
+  defp parse_attr(:tags, value, _year, _opts) do
     value
     |> String.split(",")
     |> Enum.map(&String.trim/1)
     |> Enum.sort()
   end
 
+  # point image source to the blog images folder
   defp prepend_images(content, year) do
     new_url = "<img src=\"" <> "/images/blog/#{year}/"
     Regex.replace(~r/<img src=\"/, content, new_url)
   end
+
+  # open outside links in a new tab
+  defp external_links(content, true) do
+    Regex.replace(~r/(<a href=\"http.+\")>/U, content, "\\1 target=\"_blank\">")
+  end
+
+  defp external_links(content, false), do: content
 end
