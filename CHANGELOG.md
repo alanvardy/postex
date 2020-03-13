@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.3 (2019-3-12)
+
+* All external links (identified by beginning with `http`) open in a new tab
+
 ## v0.1.2 (2019-2-26)
 
 * Added `:related_posts` association to posts, listing the top 5 related posts based on tags.

@@ -33,7 +33,7 @@ defmodule Postex do
 
       posts =
         posts_paths
-        |> Enum.map(&Post.parse!/1)
+        |> Enum.map(fn post -> Post.parse!(post, unquote(opts)) end)
         |> Validate.no_duplicate_slugs()
         |> Validate.url_length(prefix)
         |> Validate.same_data_fields()

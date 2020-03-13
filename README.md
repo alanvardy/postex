@@ -76,12 +76,12 @@ def deps do
 end
 ```
 
-Create a module and `use Postex` within it
+Create a module and `use Postex` within it.
 
 ```elixir
 defmodule YourApp.Blog do
   @moduledoc "The blog context"
-  use Postex
+  use Postex, prefix: "https://exampleblog.com/posts/"
 end
 ```
 
@@ -144,6 +144,21 @@ Format your markdown file like so
 
   This is a paragraph
 
+```
+
+## External links
+
+External links (identified by beginning with `http`) are automatically appended with `target: "_blank"` to make the link open in a new tab.
+
+You can disable this functionality with
+
+```elixir
+defmodule YourApp.Blog do
+  @moduledoc "The blog context"
+  use Postex, 
+    prefix: "https://exampleblog.com/posts/",
+    external_links_new_tab: false
+end
 ```
 
 ## Storing images
