@@ -7,6 +7,7 @@ defmodule Postex do
   """
   defmacro __using__(opts) do
     prefix = Keyword.get(opts, :prefix)
+    per_page = Keyword.get(opts, :per_page, 10)
 
     quote do
       alias Postex.{MetaData, Post, Validate}
@@ -47,6 +48,35 @@ defmodule Postex do
       @spec list_posts :: [Post.t()]
       def list_posts do
         @posts
+      end
+
+      @doc "Returns a list of posts for the page, accepts page as integer or string"
+      @spec list_posts(pos_integer | String.t()) :: [Post.t()]
+      def list_posts(page) when is_binary(page) do
+        page
+        |> String.to_integer()
+        |> list_posts()
+      end
+
+      def list_posts(page) do
+        per_page = unquote(per_page)
+        start_index = (page - 1) * per_page
+        end_index = page * per_page - 1
+
+        Enum.slice(@posts, start_index..end_index)
+      end
+
+      @doc "Number of pages of posts"
+      @spec pages :: non_neg_integer
+      def pages do
+        count = Enum.count(@posts)
+        per_page = unquote(per_page)
+
+        if rem(count, per_page) > 0 do
+          div(count, per_page) + 1
+        else
+          div(count, per_page)
+        end
       end
 
       @doc "Returns a list of all the posts with a tag"
