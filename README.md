@@ -15,6 +15,8 @@ Most of this work is not my own, all credit to Dashbit and José Valim.
 
 Documentation can be found at [https://hexdocs.pm/postex](https://hexdocs.pm/postex).
 
+This library is in use at [alanvardy.com](https://www.alanvardy.com/) ([GitHub](https://github.com/alanvardy/alan_vardy))
+
 ## Features
 
 * Posts are generated at compile time (fast access, no database required)
