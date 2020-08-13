@@ -63,7 +63,7 @@ defmodule Postex.MixProject do
   defp deps do
     [
       {:phoenix_html, "~> 2.11"},
-      {:earmark, "~> 1.3"},
+      {:earmark, "~> 1.4.10"},
       {:makeup_elixir, "~> 0.14"},
       # Tooling
       {:ex_check, ">= 0.0.0", only: :dev, runtime: false},
