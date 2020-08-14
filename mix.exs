@@ -1,7 +1,7 @@
 defmodule Postex.MixProject do
   use Mix.Project
 
-  @version "0.1.4"
+  @version "0.1.5"
 
   def project do
     [
@@ -63,14 +63,14 @@ defmodule Postex.MixProject do
   defp deps do
     [
       {:phoenix_html, "~> 2.11"},
-      {:earmark, "~> 1.4.10"},
+      {:earmark, "~> 1.4"},
       {:makeup_elixir, "~> 0.14"},
       # Tooling
-      {:ex_check, ">= 0.0.0", only: :dev, runtime: false},
-      {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.6", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.10", only: :test, runtime: false},
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:ex_check, "~> 0.12", only: :dev, runtime: false},
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.13", only: :test, runtime: false},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]}
     ]
   end
