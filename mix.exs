@@ -1,7 +1,7 @@
 defmodule Postex.MixProject do
   use Mix.Project
 
-  @version "0.1.5"
+  @version "0.1.6"
 
   def project do
     [
@@ -12,6 +12,26 @@ defmodule Postex.MixProject do
       build_embedded: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
+
+      # Dialyzer
+      dialyzer: [
+        flags: [
+          :no_behaviours,
+          :no_contracts,
+          :no_fail_call,
+          :no_fun_app,
+          :no_improper_lists,
+          :no_match,
+          :no_missing_calls,
+          :no_opaque,
+          :no_return,
+          :no_undefined_callbacks,
+          :no_unused,
+          :underspecs,
+          :unknown,
+          :unmatched_returns
+        ]
+      ],
 
       # Hex
       description: "a simple static blog generator using markdown files",

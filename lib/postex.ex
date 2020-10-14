@@ -115,7 +115,7 @@ defmodule Postex do
       end
 
       @doc "Returns a map with the tags as keys and the frequency as a value"
-      @spec tags_with_count :: map
+      @spec tags_with_count :: %{String.t() => pos_integer}
       def tags_with_count do
         @tags_with_count
       end
