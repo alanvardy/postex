@@ -88,8 +88,8 @@ Create a module and `use Postex` within it.
 defmodule YourApp.Blog do
   @moduledoc "The blog context"
   use Postex, 
-    prefix: "https://exampleblog.com/posts/" # required
-    external_links_new_tab: true # default
+    prefix: "https://exampleblog.com/posts/", # required
+    external_links_new_tab: true, # default
     per_page: 10 # default
 end
 ```
@@ -133,25 +133,25 @@ For example `/blog/2020/03-17-this-is-a-blog-slug.md`
 Format your markdown file like so
 
 ```markdown
-  ==title==
-  Your Title Goes Here
+==title==
+Your Title Goes Here
 
-  ==author==
-  Your name probably
+==author==
+Your name probably
 
-  ==description==
-  More text and stuff
+==description==
+More text and stuff
 
-  ==tags==
-  separate,your tags, with, commas
+==tags==
+separate,your tags, with, commas
 
-  ==body==
+==body==
 
-  # This is a title
+# This is a title
 
-  ![alt text](picture.jpg "Awesome picture")
+![alt text](picture.jpg "Awesome picture")
 
-  This is a paragraph
+This is a paragraph
 
 ```
 
