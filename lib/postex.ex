@@ -82,13 +82,13 @@ defmodule Postex do
       @doc "Returns a list of all the posts with a tag"
       @spec posts_tagged_with(binary) :: [Post.t()]
       def posts_tagged_with(tag) do
-        Enum.filter(@posts, fn post -> Enum.member?(post.tags, tag) end)
+        Enum.filter(@posts, fn %{tags: tags} -> Enum.member?(tags, tag) end)
       end
 
       @doc "Gets a specific post by the id (slug)"
       @spec get_post(binary) :: Post.t() | nil
       def get_post(id) do
-        Enum.find(@posts, fn post -> post.id == id end)
+        Enum.find(@posts, &(&1.id == id))
       end
 
       @spec fetch_post(binary) :: {:ok, Post.t()} | {:error, :not_found}

@@ -4,38 +4,29 @@ defmodule Postex.Post do
   alias Postex.Highlighter
 
   @enforce_keys [
-    :id,
-    :filename,
     :author,
-    :title,
     :body,
-    :description,
-    :tags,
-    :data
-  ]
-  defstruct [
-    :id,
-    :filename,
-    :author,
-    :title,
-    :body,
-    :description,
-    :tags,
-    :date,
     :data,
-    :related_posts
+    :date,
+    :description,
+    :filename,
+    :id,
+    :related_posts,
+    :tags,
+    :title
   ]
+  defstruct @enforce_keys
 
   @type t :: %__MODULE__{
-          id: binary,
           author: binary,
-          title: binary,
           body: binary,
-          description: binary,
-          tags: [binary],
-          related_posts: [t()],
+          data: map,
           date: Date.t(),
-          data: map
+          description: binary,
+          id: binary,
+          related_posts: [t()],
+          tags: [binary],
+          title: binary
         }
 
   defimpl String.Chars, for: __MODULE__ do
@@ -107,7 +98,7 @@ defmodule Postex.Post do
   defp parse_attr(:tags, value, _year, _opts) do
     value
     |> String.split(",")
-    |> Enum.map(&String.trim/1)
+    |> Stream.map(&String.trim/1)
     |> Enum.sort()
   end
 

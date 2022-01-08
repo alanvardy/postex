@@ -15,8 +15,8 @@ defmodule Postex.MetaData do
 
     related_posts =
       posts
-      |> Enum.reject(fn post -> post.id == id end)
-      |> Enum.map(fn post -> {count_related_tags(post, tags), post} end)
+      |> Stream.reject(fn post -> post.id == id end)
+      |> Stream.map(fn post -> {count_related_tags(post, tags), post} end)
       |> Enum.sort(&(elem(&1, 0) >= elem(&2, 0)))
       |> Enum.take(5)
       |> Enum.map(fn {_count, post} -> post end)

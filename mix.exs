@@ -1,13 +1,13 @@
 defmodule Postex.MixProject do
   use Mix.Project
 
-  @version "0.1.6"
+  @version "0.1.7"
 
   def project do
     [
       app: :postex,
       version: @version,
-      elixir: "~> 1.10",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       build_embedded: Mix.env() == :prod,
       deps: deps(),

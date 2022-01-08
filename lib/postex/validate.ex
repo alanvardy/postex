@@ -21,8 +21,8 @@ defmodule Postex.Validate do
 
       bad_files =
         posts
-        |> Enum.filter(fn post -> post.id == bad_slug end)
-        |> Enum.map(fn post -> post.filename end)
+        |> Stream.filter(fn post -> post.id == bad_slug end)
+        |> Stream.map(fn post -> post.filename end)
         |> Enum.join(", ")
 
       raise """
@@ -83,10 +83,7 @@ defmodule Postex.Validate do
         posts
 
       posts ->
-        posts_message =
-          posts
-          |> Enum.map(fn post -> url_error_message(post, prefix) end)
-          |> Enum.join("\n\n")
+        posts_message = Enum.map_join(posts, "\n\n", &url_error_message(&1, prefix))
 
         raise """
         The following posts have addresses that are greater than 60 characters, which negatively impacts SEO.
