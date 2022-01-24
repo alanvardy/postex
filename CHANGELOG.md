@@ -2,6 +2,7 @@
 
 ## Unreleased
 - Update Elixir and Erlang versions
+- Use new GitHub action for building Elixir/Erlang
 
 ## v0.1.6 (2020-10-14)
 
