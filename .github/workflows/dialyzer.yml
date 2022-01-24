@@ -4,9 +4,9 @@ on: push
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1.0.0
+      - uses: actions/checkout@v2
       - uses: actions/cache@v1
         with:
           path: deps
@@ -19,9 +19,9 @@ jobs:
           key: ${{ runner.os }}-build-dialyzer-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-dialyzer-
-      - uses: actions/setup-elixir@v1.0.0
+      - uses: erlef/setup-beam@v1
         with:
-          otp-version: 22.4
+          otp-version: 24.1.7
           elixir-version: 1.12
       - run: mix deps.get
       - run: MIX_ENV=dev mix check --only dialyzer
