@@ -4,7 +4,7 @@ on: push
 
 jobs:
   test:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v1.0.0
       - uses: actions/cache@v1
@@ -21,7 +21,7 @@ jobs:
             ${{ runner.os }}-build-dialyzer-
       - uses: actions/setup-elixir@v1.0.0
         with:
-          otp-version: 22.1.8
-          elixir-version: 1.10.1
+          otp-version: 22.4
+          elixir-version: 1.12
       - run: mix deps.get
       - run: MIX_ENV=dev mix check --only dialyzer

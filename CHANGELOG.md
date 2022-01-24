@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Update Elixir and Erlang versions
+
 ## v0.1.6 (2020-10-14)
 
 * Update dependencies.
