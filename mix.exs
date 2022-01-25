@@ -82,15 +82,16 @@ defmodule Postex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix_html, "~> 2.11"},
-      {:earmark, "~> 1.4"},
+      {:phoenix_html, "~> 3.2"},
       {:makeup_elixir, "~> 0.14"},
+      {:earmark, "~> 1.4.20"},
+      {:earmark_parser, "~> 1.4.18"},
       # Tooling
       {:ex_check, "~> 0.12", only: :dev, runtime: false},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.13", only: :test, runtime: false},
-      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.26", only: :dev, runtime: false},
       {:inch_ex, github: "rrrene/inch_ex", only: [:dev, :test]}
     ]
   end

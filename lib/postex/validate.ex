@@ -22,8 +22,7 @@ defmodule Postex.Validate do
       bad_files =
         posts
         |> Enum.filter(fn post -> post.id == bad_slug end)
-        |> Enum.map(fn post -> post.filename end)
-        |> Enum.join(", ")
+        |> Enum.map_join(", ", fn post -> post.filename end)
 
       raise """
       Duplicate slug #{bad_slug} detected in files:
@@ -84,9 +83,7 @@ defmodule Postex.Validate do
 
       posts ->
         posts_message =
-          posts
-          |> Enum.map(fn post -> url_error_message(post, prefix) end)
-          |> Enum.join("\n\n")
+          Enum.map_join(posts, "\n\n", fn post -> url_error_message(post, prefix) end)
 
         raise """
         The following posts have addresses that are greater than 60 characters, which negatively impacts SEO.
