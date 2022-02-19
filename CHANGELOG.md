@@ -2,6 +2,7 @@
 
 ## Unreleased
 - Update GitHub cache action to v2
+- Update asset path in instructions
 
 ## v0.1.7 (2021-01-24)
 - Update Elixir and Erlang versions
