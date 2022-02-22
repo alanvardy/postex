@@ -173,7 +173,7 @@ end
 
 ## Storing images
 
-Store your images in the path `/assets/static/images/blog/{year}/{picture.jpg}` and reference them by the filename only (as seen in the example above).
+Store your images in the path `/priv/static/images/blog/{year}/{picture.jpg}` and reference them by the filename only (as seen in the example above).
 
 ## Pagination
 
