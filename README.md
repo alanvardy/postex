@@ -181,7 +181,7 @@ If you wish to implement pagination, check out the [GitHub repository for alanva
 
 ## Recompiling
 
-You may have occasional issues getting a markdown file recognized after being added or renamed, in this case run `mix recompile --force`.
+You may have occasional issues getting a markdown file recognized after being added or renamed, in this case run `mix compile --force`.
 
 ## Contributing
 
