@@ -3,6 +3,7 @@
 ## Unreleased
 - Update GitHub cache action to v2
 - Update asset path in instructions
+- Enforce no spaces in tags with clear error message
 
 ## v0.1.7 (2021-01-24)
 - Update Elixir and Erlang versions

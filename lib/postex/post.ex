@@ -108,6 +108,7 @@ defmodule Postex.Post do
     value
     |> String.split(",")
     |> Enum.map(&String.trim/1)
+    |> Enum.map(&validate_no_spaces/1)
     |> Enum.sort()
   end
 
@@ -123,4 +124,12 @@ defmodule Postex.Post do
   end
 
   defp external_links(content, false), do: content
+
+  defp validate_no_spaces(tag) do
+    if String.contains?(tag, " ") do
+      raise "Tag #{inspect(tag)} contains spaces. Tags cannot contain spaces and must be comma separated."
+    else
+      tag
+    end
+  end
 end
