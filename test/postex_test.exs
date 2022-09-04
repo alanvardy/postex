@@ -24,7 +24,7 @@ defmodule PostexTest do
     description: "It is a description",
     data: %{footer: "_some_footer"},
     id: "test-one",
-    tags: ["tag one", "three", "two"],
+    tags: ["one", "three", "two"],
     title: "Test of the testiest variety",
     filename: "posts/2020/03-17-test-one.md",
     related_posts: []
@@ -66,11 +66,11 @@ defmodule PostexTest do
   end
 
   test "Can get posts associated with tag" do
-    assert Blog.posts_tagged_with("tag one") == [@post_two]
+    assert Blog.posts_tagged_with("one") == [@post_two]
     assert Blog.posts_tagged_with("two") == [@post_one, @post_two]
   end
 
   test "Can get count of tags" do
-    assert Blog.tags_with_count() == %{"tag one" => 1, "three" => 2, "two" => 2}
+    assert Blog.tags_with_count() == %{"one" => 1, "three" => 2, "two" => 2}
   end
 end

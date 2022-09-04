@@ -11,7 +11,7 @@ _some_footer
 It is a description
 
 ==tags==
-tag one,two,three
+one,two,three
 
 ==body==
 
