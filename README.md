@@ -1,13 +1,13 @@
 # Postex
 
-[![Build Status](https://github.com/alanvardy/postex/workflows/Unit%20Tests/badge.svg)](https://github.com/alanvardy/postex) 
-[![Build Status](https://github.com/alanvardy/postex/workflows/Dialyzer/badge.svg)](https://github.com/alanvardy/postex) 
+[![Build Status](https://github.com/alanvardy/postex/workflows/Unit%20Tests/badge.svg)](https://github.com/alanvardy/postex)
+[![Build Status](https://github.com/alanvardy/postex/workflows/Dialyzer/badge.svg)](https://github.com/alanvardy/postex)
 [![hex.pm](http://img.shields.io/hexpm/v/postex.svg?style=flat)](https://hex.pm/packages/postex)
 [![codecov](https://codecov.io/gh/alanvardy/exzeitable/branch/master/graph/badge.svg?token=P3O42SF7VJ)](https://codecov.io/gh/alanvardy/exzeitable)
 
 Postex is a simple static blog generator using markdown files that was inspired/shamelessly copied from [Dashbit's blog post](https://dashbit.co/blog/welcome-to-our-blog-how-it-was-made).
 
-The posts are generated at compile time, and syntax highlighting works well. Earmark is used 
+The posts are generated at compile time, and syntax highlighting works well. Earmark is used
 for markdown parsing and makeup_elixir / stolen ex_doc code for syntax highlighting. Phoenix_html is pulled in for a single protocol implementation.
 
 This library just provides the context. The routes, views, controllers and templates are still in your hands.
@@ -38,11 +38,11 @@ This library is in use at [alanvardy.com](https://www.alanvardy.com/) ([GitHub](
 
 Assuming that you `use Postex` in a module named `Blog`, your API is:
 
-####  `Blog.list_posts/0`
+#### `Blog.list_posts/0`
 
 Lists all the posts
 
-####  `Blog.list_posts/1`
+#### `Blog.list_posts/1`
 
 With a given page, lists the posts for that page (default posts per page is 10)
 
@@ -66,7 +66,6 @@ Lists all the tags
 
 Returns a map where the string keys are the tags, and values are integers representing the frequency of their appearance.
 
-
 ## Installation
 
 This library requires `Elixir >= 1.10`
@@ -78,7 +77,7 @@ Add `postex` to your list of dependencies in `mix.exs`:
 
 def deps do
   [
-    {:postex, "~> 0.1.6"}
+    {:postex, "~> 0.1.8"}
   ]
 end
 ```
@@ -123,13 +122,11 @@ And build out your controllers, views, and templates.
 
 Check `CSS.md` for an example on styling the HTML output.
 
-
 ## Adding Templates and Pictures
 
-Store markdown files with the path `/blog/{year}/{month}-{day}-{slug}.md` 
+Store markdown files with the path `/blog/{year}/{month}-{day}-{slug}.md`
 
 For example `/blog/2020/03-17-this-is-a-blog-slug.md`
-
 
 Format your markdown file like so
 
@@ -144,7 +141,7 @@ Your name probably
 More text and stuff
 
 ==tags==
-separate,your tags, with, commas
+separate,your_tags,with,commas
 
 ==body==
 

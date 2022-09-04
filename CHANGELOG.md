@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.1.8 (2022-09-04)
+
 - Enforce no spaces in tags with clear error message
 - Update GitHub cache action to v2
 - Update asset path in instructions
