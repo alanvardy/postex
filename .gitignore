@@ -23,3 +23,7 @@ erl_crash.dump
 postex-*.tar
 
 .elixir_ls
+
+# Dialyzer
+*.plt
+*.plt.hash

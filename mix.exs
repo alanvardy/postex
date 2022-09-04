@@ -15,21 +15,15 @@ defmodule Postex.MixProject do
 
       # Dialyzer
       dialyzer: [
+        list_unused_filters: true,
+        plt_local_path: "dialyzer",
+        plt_core_path: "dialyzer",
         flags: [
-          :no_behaviours,
-          :no_contracts,
-          :no_fail_call,
-          :no_fun_app,
-          :no_improper_lists,
-          :no_match,
-          :no_missing_calls,
-          :no_opaque,
-          :no_return,
-          :no_undefined_callbacks,
-          :no_unused,
           :underspecs,
           :unknown,
-          :unmatched_returns
+          :unmatched_returns,
+          :extra_return,
+          :missing_return
         ]
       ],
 
