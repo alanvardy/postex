@@ -20,49 +20,49 @@ This library is in use at [alanvardy.com](https://www.alanvardy.com/) ([GitHub](
 
 ## Features
 
-* Posts are generated at compile time (fast access, no database required)
-* Posts live update as you edit them.
-* Posts have tags
-* Elixir syntax highlighting
-* You can add as many additional fields as you want, they can be found under `:data` and are represented as a map.
-* Includes 5 related posts (determined based on how many tags they share) as an association for each post
-* Easy image handling (see below)
+- Posts are generated at compile time (fast access, no database required)
+- Posts live update as you edit them.
+- Posts have tags
+- Elixir syntax highlighting
+- You can add as many additional fields as you want, they can be found under `:data` and are represented as a map.
+- Includes 5 related posts (determined based on how many tags they share) as an association for each post
+- Easy image handling (see below)
 
 ## Compile Time Checks
 
-* Post url does not exceed 60 characters (for SEO - can be disabled)
-* No duplicate slugs (post ids)
-* All field keys are consistent across all posts (including within the data field)
+- Post url does not exceed 60 characters (for SEO - can be disabled)
+- No duplicate slugs (post ids)
+- All field keys are consistent across all posts (including within the data field)
 
 ## Usage
 
 Assuming that you `use Postex` in a module named `Blog`, your API is:
 
-#### `Blog.list_posts/0`
+### `Blog.list_posts/0`
 
 Lists all the posts
 
-#### `Blog.list_posts/1`
+### `Blog.list_posts/1`
 
 With a given page, lists the posts for that page (default posts per page is 10)
 
-#### `Blog.posts_tagged_with/1`
+### `Blog.posts_tagged_with/1`
 
 Pass it a single tag and it will return a list of the posts with that tag
 
-#### `Blog.get_post/1`
+### `Blog.get_post/1`
 
 Get a post by id (slug), returns `nil` if not found,
 
-#### `Blog.fetch_post/1`
+### `Blog.fetch_post/1`
 
 Get a post by id (slug), returns `{:ok, post}` or `{:error, :not_found}`
   
-#### `Blog.list_tags/0`
+### `Blog.list_tags/0`
 
 Lists all the tags
 
-#### `Blog.tags_with_count/0`
+### `Blog.tags_with_count/0`
 
 Returns a map where the string keys are the tags, and values are integers representing the frequency of their appearance.
 
