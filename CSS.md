@@ -1,6 +1,6 @@
 # Adding CSS to your post
 
-Here is some of my SASS file to get you started. I use Bootstrap 4, if you use a different framework or vanilla CSS you will need to replace the @extend's with something else.
+Here is a part of my SASS file to get you started. I initially used Bootstrap 4; if you use a different framework or vanilla CSS, you need to replace the `@extend`s with something else.
 
 ```css
 // I wrap the HTML output in .blog-body
