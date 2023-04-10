@@ -27,7 +27,6 @@ defmodule Postex.MetaData do
   defp count_related_tags(post, tags) do
     post
     |> Map.get(:tags)
-    |> Enum.filter(fn tag -> tag in tags end)
-    |> Enum.count()
+    |> Enum.count(fn tag -> tag in tags end)
   end
 end
