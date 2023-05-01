@@ -5,7 +5,7 @@ defmodule PostexTest do
   post_one = %{
     author: "Alan Vardy",
     body:
-      "<h1>\nThis is a title</h1>\n<p>\n  <img src=\"/images/blog/2020/picture.jpg\" alt=\"alt text\" title=\"Awesome picture\" />\n</p>\n<p>\nThis is text</p>\n",
+      "<h1>\nThis is a title</h1>\n<p>\n  <img src=\"/images/blog/2020/picture.jpg\" alt=\"alt text\" title=\"Awesome picture\">\n</p>\n<p>\nThis is text</p>\n",
     date: ~D[2020-03-18],
     description: "Uh huh",
     filename: "posts/2020/03-18-test-two.md",
@@ -19,7 +19,7 @@ defmodule PostexTest do
   post_two = %{
     author: "Alan Vardy",
     body:
-      "<h1>\nThis is a title</h1>\n<p>\n  <img src=\"/images/blog/2020/picture.jpg\" alt=\"alt text\" title=\"Awesome picture\" />\n</p>\n<p>\nThis is text</p>\n",
+      "<h1>\nThis is a title</h1>\n<p>\n  <img src=\"/images/blog/2020/picture.jpg\" alt=\"alt text\" title=\"Awesome picture\">\n</p>\n<p>\nThis is text</p>\n",
     date: ~D[2020-03-17],
     description: "It is a description",
     data: %{footer: "_some_footer"},
