@@ -1,0 +1,71 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  coveralls:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-coveralls-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-coveralls-
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: 25.0
+          elixir-version: 1.14.0
+      - run: mix deps.get
+      - run: MIX_ENV=test mix coveralls.json
+      - name: Upload to codecov.io
+        uses: codecov/codecov-action@v1
+  auto-merge:
+    if: ${{ github.event_name == 'pull_request'}}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          target: minor
+          github-token: ${{ secrets.MYTOKEN}} 
+  dialyzer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            deps
+            _build
+            dialyzer
+          key: ${{ runner.os }}-mix-dialyzer-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-dialyzer-
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: 25.0
+          elixir-version: 1.14.0
+      - run: mix deps.get
+      - run: MIX_ENV=dev mix check --only dialyzer
+  ex_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-ex_check-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-ex_check-
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: 25.0
+          elixir-version: 1.14.0
+      - run: mix deps.get
+      - run: MIX_ENV=dev mix check --except ex_unit --except dialyzer
