@@ -76,7 +76,7 @@ defmodule Postex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix_html, "~> 3.2"},
+      {:phoenix_html, "~> 4.0"},
       {:makeup_elixir, "~> 0.14"},
       {:earmark, "~> 1.4.20"},
       {:earmark_parser, "~> 1.4.18"},
