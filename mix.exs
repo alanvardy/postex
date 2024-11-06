@@ -77,7 +77,7 @@ defmodule Postex.MixProject do
   defp deps do
     [
       {:phoenix_html, "~> 4.0"},
-      {:makeup_elixir, "~> 0.14"},
+      {:makeup_elixir, "~> 1.0"},
       {:earmark, "~> 1.4.20"},
       {:earmark_parser, "~> 1.4.18"},
       # Tooling
