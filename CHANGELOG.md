@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## v0.1.9 (2024-12-20)
+
+- Update Elixir/Erlang versions
+- Update dependencies
+
 ## v0.1.8 (2022-09-04)
 
 - Enforce no spaces in tags with a clear error message
